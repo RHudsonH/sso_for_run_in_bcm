@@ -7,7 +7,7 @@ vaultpass
 
 # Encrypted vault files
 group_vars/bcm/vault.yaml
-vault.yaml
+group_vars/bcm/users.yaml
 
 # Python virtual environment
 venv/
