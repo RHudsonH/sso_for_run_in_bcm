@@ -1,0 +1,48 @@
+---
+
+bcm_groups:
+  - name: research1
+    gid: 7001
+  - name: research2
+    gid: 7002
+  - name: research3
+    gid: 7003
+  - name: run_users
+    gid:  8001
+    members:
+      - research1
+      - research2
+      - research3
+  - name: dept1
+    gid: 9001
+    members:
+      - research1
+  - name: dept2
+    gid: 9002
+    members:
+      - research2
+      - research3
+
+bcm_users:
+  - name: research1 
+    uid: 7001
+    fullName: "Research One"
+    email: research1@markiiisys.com
+    gid: 7001
+    shell: /bin/false
+    surname: One
+  - name: research2 
+    uid: 7002
+    fullName: "Research Two"
+    email: research2@markiiisys.com
+    gid: 7002
+    shell: /bin/false
+    surname: Two
+  - name: research3 
+    uid: 7003
+    fullName: "Research Three"
+    email: research3@markiiisys.com
+    gid: 7003
+    shell: /bin/false
+    surname: Three
+    

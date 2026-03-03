@@ -1,0 +1,35 @@
+---
+- name: Batch Add Users
+  hosts: bcm
+
+  tasks:
+    - name: Add Groups
+      brightcomputing.bcm110.group:
+        name: "{{ item.name }}"
+        ID: "{{ item.gid }}"
+        state: present
+      loop: "{{ bcm_groups }}"
+  
+    - name: Add Users
+      brightcomputing.bcm110.user:
+        name: "{{ item.name }}"
+        ID: "{{ item.uid }}"
+        commonName: "{{ item.fullName }}"
+        email: "{{ item.email }}"
+        groupID: "{{ item.gid }}"
+        homeDirOperation: false
+        password: "{{ vault_user_passwords[item.name] | default(vault_default_password) }}"
+        state: present
+        loginShell: "{{ item.shell | default(omit) }}"
+        surname: "{{ item.surname }}"
+      loop: "{{ bcm_users }}"
+ 
+    - name: Add Users to Groups
+      brightcomputing.bcm110.group:
+        name: "{{ item.name }}"
+        members: "{{ item.members }}"
+        state: present
+      loop: "{{ bcm_groups }}"
+      when: item.members is defined
+
+

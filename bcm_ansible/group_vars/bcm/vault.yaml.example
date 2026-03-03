@@ -1,0 +1,5 @@
+---
+vault_default_password: default_password
+vault_user_passwords:
+  research: "user specific password"
+

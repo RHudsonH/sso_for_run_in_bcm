@@ -1,0 +1,36 @@
+# Personal ansible config
+ansible.cfg
+inventory.yaml
+
+# Ansible vault password file
+vaultpass
+
+# Encrypted vault files
+group_vars/bcm/vault.yaml
+vault.yaml
+
+# Python virtual environment
+venv/
+
+# Ansible retry files
+*.retry
+
+# Ansible temporary files
+*.tmp
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+

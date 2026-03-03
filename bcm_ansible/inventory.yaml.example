@@ -1,0 +1,16 @@
+---
+all:
+  vars:
+    ansible_user: ubuntu
+  hosts:
+    bcm01:
+      ansible_host: 10.141.255.254
+      ansible_python_interpreter: /usr/bin/python3
+  children:
+    bcm:
+      children:
+        headnode:
+          hosts:
+            bcm01:
+
+
