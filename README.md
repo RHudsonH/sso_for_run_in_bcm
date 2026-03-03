@@ -6,6 +6,7 @@ As run is deployed by Base Command Manager (BCM) in this lab, the the BCM manage
 
 ## Architecture Overview
 
+```mermaid
 flowchart LR
     R([Run:ai]) -->|SSO Authentication| K([Keycloak])
     K -->|LDAP query - no mTLS| H([HAProxy])
@@ -18,3 +19,5 @@ flowchart LR
     style K fill:#4d9e3f,color:#fff,stroke:none
     style H fill:#e07b00,color:#fff,stroke:none
     style L fill:#8b0000,color:#fff,stroke:none
+```
+
