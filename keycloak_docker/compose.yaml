@@ -1,0 +1,58 @@
+---
+name: SSO
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ${PWD}/postgres-data:/var/lib/postgresql/data
+    networks:
+      - back_end
+
+  keycloak:
+    build:
+      context: keycloak/image
+    restart: unless-stopped
+    ports:
+      - 0.0.0.0:443:8443
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_DATABASE: ${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HTTPS_CERTIFICATE_FILE: /opt/keycloak/conf/certs/Keycloak_BCM.crt
+      KC_HTTPS_CERTIFICATE_KEY_FILE: /opt/keycloak/conf/certs/Keycloak_BCM.key
+    command: ["start-dev" ]
+    depends_on:
+      - postgres
+    volumes:
+      - ${PWD}/keycloak_certs/:/opt/keycloak/conf/certs/
+    networks:
+      - iam
+      - back_end
+
+  ldap-proxy:
+    image: haproxy:3.0
+    restart: unless-stopped
+    # Need to add resolution for ldapserver as this is the name on the ldap server's certificate.
+    extra_hosts:
+      - "ldapserver=10.141.255.254"
+    ports:
+      - 3389:389
+    volumes:
+      - ${PWD}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ${PWD}/haproxy/certs:/etc/haproxy/certs:ro
+    networks:
+      - iam
+
+networks:
+  iam: {}
+  back_end: {}
+

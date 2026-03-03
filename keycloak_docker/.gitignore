@@ -1,0 +1,7 @@
+# The .env file contains some secrets
+.env
+
+keycloak_certs/*
+haproxy/certs/*
+keycloak/image/keycloak_providers/*
+

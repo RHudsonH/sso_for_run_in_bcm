@@ -1,0 +1,15 @@
+# Maven build output
+keycloak-gid-mapper/target/
+
+.DS_Store
+Thumbs.db
+
+*.log
+logs/
+
+*.env
+.env.local
+
+**/application-local.properties
+**/applicaiton-local.yml
+
