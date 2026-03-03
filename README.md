@@ -21,3 +21,7 @@ flowchart LR
     style L fill:#8b0000,color:#fff,stroke:none
 ```
 
+Run:ai is configured to use Keycloak as the OIDC SSO provider.
+
+Keycloak proved difficult to configure with mTLS in order to present a client certificate directly to BCM's OpenLDAP. Rather than disable the client certificate requirement in OpenLDAP, HAProxy is used to provide an ldap front end to Keycloak that does not require mTLS. HAProxy then handles the mTLS communications with the BCM OpenLDAP server.
+
