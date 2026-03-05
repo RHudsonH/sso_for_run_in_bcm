@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 2. Install Ansible collections
 ```shell
-ansible-galaxy colleciton install -r requirements.yaml
+ansible-galaxy collection install -r requirements.yaml
 ```
 
 ## Notes
